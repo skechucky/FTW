@@ -18,7 +18,7 @@ public class CameraManager : MonoBehaviour
 
 	}
 
-	void FixedUpdate()
+	void Update()
 	{
 		Vector3 willBeAt = (!playerAbilities.isControled) ? (playerTransform.position + offset) : (animalTransform.position);
 		willBeAt.z = transform.position.z;

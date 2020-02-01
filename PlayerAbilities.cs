@@ -15,7 +15,7 @@ public class PlayerAbilities : MonoBehaviour
 	LineRenderer lr;
 	public float velocity; //set by hit, this need be found
 	public float angle;
-    int segmentsLenght = 10; //manipulate in inspector, tell us how many segments have our arc
+    int segmentsLenght = 3; //manipulate in inspector, tell us how many segments have our arc
 	float g; // force of gravity on the y axe
 	float radianValue;//Un radian este o unitate de măsură pentru măsura unghiurilor. 
 	public int currentAbility;
@@ -81,22 +81,18 @@ public class PlayerAbilities : MonoBehaviour
 
 			Vector2 camRay22 = cam.ScreenToWorldPoint(mouse);
 			newLayer = isControled ? playerLayer : animalLayer; 
-			if (Physics2D.Raycast(camRay22, Vector2.right, 1000f, newLayer))
+			if (Physics2D.Raycast(camRay22, Vector2.right, 100f, newLayer))
 			{
 				
 				if (!isControled)
 				{
-					Debug.Log("control");
 					canThrow = false;
 					isControled = true;
-					playerController.playerMovement.box = playerController.playerAnimal.GetComponent<BoxCollider2D>();
 				}
 				else
 				{
-					Debug.Log("stop control");
 					canThrow = true;
 					isControled = false;
-					playerController.playerMovement.box = playerController.GetComponent<BoxCollider2D>();
 				}
 			}
 		}
@@ -110,7 +106,7 @@ public class PlayerAbilities : MonoBehaviour
 			mouse.z = -cam.transform.position.z;
 
 			Vector2 camRay22 = cam.ScreenToWorldPoint(mouse);
-			if (Physics2D.Raycast(camRay22, Vector2.right, 1000f, ballLayer)) 
+			if (Physics2D.Raycast(camRay22, Vector2.right, 100f, ballLayer)) 
 			{
 				obj.GetComponent<BallInteractions>().ballSignalCanBeTaken = false; 
 				canThrow = true;
@@ -128,7 +124,7 @@ public class PlayerAbilities : MonoBehaviour
 			Vector3 mouse = Input.mousePosition;
 			mouse.z = -cam.transform.position.z;
 			Vector2 camRay22 = cam.ScreenToWorldPoint(mouse);
-			RaycastHit2D hit = Physics2D.Raycast(camRay22, Vector2.right, 1000f, interactionsLayer);
+			RaycastHit2D hit = Physics2D.Raycast(camRay22, Vector2.right, 100f, interactionsLayer);
 			if (hit)
 			{
 				SetProjectile(hit);
@@ -267,7 +263,7 @@ public class PlayerAbilities : MonoBehaviour
 		if (collision.tag == "Animal" || collision.tag == "Trap")
 		{
 			canThrow = false; // Stop using throw bu
-			playerController.isDead = true;
+            playerController.isDead = true;
 		}
 
 	}

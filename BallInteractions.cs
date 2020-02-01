@@ -2,18 +2,12 @@
 
 public class BallInteractions : MonoBehaviour
 {
-	PlayerAbilities playerAbilities;
-	Animator auraAnimation;
+	public PlayerAbilities playerAbilities;
+	public Animator auraAnimation;
 	public bool ballSignalCanBeTaken; //ball aura
 	public bool ballOnGround; ////ball is on ground
-
-	void Start()
-	{
-		playerAbilities = GameObject.FindGameObjectWithTag("PlayerAbilities").GetComponent<PlayerAbilities>();
-		auraAnimation = GameObject.FindGameObjectWithTag("BallAura").GetComponent<Animator>();
-	}
-
-	void Update()
+    public PlayerController playerController;
+    void Update()
 	{
 		if(ballSignalCanBeTaken && ballOnGround)
 		{
@@ -34,7 +28,7 @@ public class BallInteractions : MonoBehaviour
 		if (collision.tag == "Animal" || collision.tag == "Trap")
 		{
 			playerAbilities.canThrow = false; // Stop using throw bu
-			playerAbilities.GetComponentInParent<PlayerController>().isDead = true;
+            playerController.isDead = true;
 			Destroy(gameObject);
 		}
 		if (collision.tag == "Ground") //ball is on ground

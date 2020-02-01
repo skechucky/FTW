@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UIAbilitiesButtons : MonoBehaviour
 {
-	PlayerAbilities playerAbilities;
+    public PlayerAbilities playerAbilities;
     PlayerController playerController;
 	public Button[] buttonsArray;
 	ColorBlock[] storedColorsArray = new ColorBlock[3]; //store our colors
@@ -12,7 +12,7 @@ public class UIAbilitiesButtons : MonoBehaviour
 
 	private void Start()
 	{
-		playerAbilities = GameObject.FindGameObjectWithTag("PlayerAbilities").GetComponent<PlayerAbilities>();
+		//playerAbilities = GameObject.FindGameObjectWithTag("PlayerAbilities").GetComponent<PlayerAbilities>();
 		playerController = playerAbilities.GetComponentInParent<PlayerController>();
 		PopulateArrayColors();
 	}
@@ -59,9 +59,9 @@ public class UIAbilitiesButtons : MonoBehaviour
 
 	public void UI_Ability3() //Jump
 	{
-		if (!playerController.isJump && playerController.playerMovement.bottomRay)
+		if (playerController.jumpState == PlayerController.JumpState.Grounded)
 		{
-			playerController.isJump = true;
+			playerController.jumpInput = 1;
 		}
 	}
 
